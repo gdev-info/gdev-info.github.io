@@ -224,9 +224,9 @@
 			}
 		},
 		mounted: {
-			axios.get("./assets/campany.json").then(response => (this.campanys = response.data))
-			axios.get("./assets/session.json").then(response => (this.sessions = response.data))
-			axios.get("./assets/tool.json").then(response => (this.tools = response.data))
+			axios.get("./assets/campany.json").then(response => {this.campanys = response.data})
+			axios.get("./assets/session.json").then(response => {this.sessions = response.data})
+			axios.get("./assets/tool.json").then(response => {this.tools = response.data})
 		}
 	})
 	</script>
