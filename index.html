@@ -104,6 +104,7 @@
 				</tr>
 				</tbody>
 			</table>
+			<p>本サイトは、鈴木 英仁氏の「<a href="https://docs.google.com/spreadsheets/d/1JSA41-4fOaXMNqb-vBHodZePtBFdFXhAF_zZ8TYapn8/edit?fbclid=IwAR2naOBrCh1fcO2vhVHuNT6ZD78MErOuEBUmc-F8Imqm7wowlH-tUiUvnbo#gid=0">2021卒向け就職活動資料</a>」の情報を参考にさせていただいております。</p>
 		</div>
 		<div v-else-if="page === 'ゲーム会社'">
 			<table>
@@ -126,7 +127,6 @@
 		</div>
 	</div>
 	<div>本サイトは、公益財団法人 中山隼雄科学技術文化財団の研究助成事業の援助を受けて構築されました。<div>
-	<div>本サイトは、鈴木 英仁氏の「<a href="https://docs.google.com/spreadsheets/d/1JSA41-4fOaXMNqb-vBHodZePtBFdFXhAF_zZ8TYapn8/edit?fbclid=IwAR2naOBrCh1fcO2vhVHuNT6ZD78MErOuEBUmc-F8Imqm7wowlH-tUiUvnbo#gid=0">2021卒向け就職活動資料</a>」の情報を参考にさせていただいております。<div>
 
 	<script>
 	var app = new Vue({
@@ -223,7 +223,7 @@
 		},
 		mounted: function () {
 			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions = response.data; console.log(this.sessions)})
-			axios.get('https://gdev.info//assets/tool.json').then(response => {this.tools = response.data.data; console.log(this.tools)})
+			axios.get('https://gdev.info//assets/tool.json').then(response => {this.tools = response.data; console.log(this.tools)})
 			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response.data; console.log(this.companies)})
 		},
 	})
