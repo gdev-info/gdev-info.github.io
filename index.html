@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>gdev.info</title>
 	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 	<style>
@@ -217,11 +218,16 @@
 				
 				columns: columns,
 				pageType: 'session',
-				sessions: require("./assets/session.json"),
-				tools: require("./assets/tool.json"),
-				campanys: require("./assets/campany.json"),
+				sessions: [],
+				tools: [],
+				campanys: [],
 			}
 		},
+		mounted: {
+			axios.get("./assets/campany.json").then(response => {this.campanys = response.data});
+			axios.get("./assets/session.json").then(response => {this.sessions = response.data});
+			axios.get("./assets/tool.json").then(response => {this.tools = response.data});
+		}
 	})
 	</script>
 </body>
