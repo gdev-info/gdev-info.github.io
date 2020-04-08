@@ -218,20 +218,15 @@
 				
 				columns: columns,
 				pageType: 'session',
-				sessions: []
-,
+				sessions: [],
 				tools: [],
 				campanys: [],
-				
-				session_data: [],
-				tool_data: [],
-				campany_data: [],
 			}
 		},
-		beforeCreate: function () {
-			axios.get("./assets/campany.json").then(response => (this.campanys = response))
-			axios.get("./assets/session.json").then(response => (this.sessions = response))
-			axios.get("./assets/tool.json").then(response => (this.tools = response))
+		mounted: {
+			axios.get("./assets/campany.json").then(response => (this.campanys = response.data))
+			axios.get("./assets/session.json").then(response => (this.sessions = response.data))
+			axios.get("./assets/tool.json").then(response => (this.tools = response.data))
 		}
 	})
 	</script>
