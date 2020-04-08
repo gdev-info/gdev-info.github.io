@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>gdev.info</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-<!--	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<!--	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>-->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -104,8 +104,6 @@
 				</tr>
 				</tbody>
 			</table>
-		</div>
-		<div v-else>
 		</div>
 		<div v-else-if="page === 'ゲーム会社'">
 			<table>
@@ -223,12 +221,11 @@
 				companies: [],
 			}
 		},
-		mounted: {
-			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response})
-          .catch(response => console.log(response));
-			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions = response});
-			axios.get('https://gdev.info//assets/tool.json').then(response => {this.tools = response});
-		}
+		mounted: function () {
+			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions = response.data; console.log(this.sessions)})
+			axios.get('https://gdev.info//assets/tool.json').then(response => {this.tools = response.data.data; console.log(this.tools)})
+			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response.data; console.log(this.companies)})
+		},
 	})
 	</script>
 </body>
