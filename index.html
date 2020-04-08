@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>gdev.info</title>
-<!--	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>-->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<!--	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -49,79 +49,53 @@
 			<table>
 				<thead>
 				<tr>
-
-					<th v-on:click='sortBy("id")'    :class="['sortable',{active: sortKey == 'id'    }]" >インデックス<span class="arrow" :class="sortOrders['id'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-					<th v-on:click='sortBy("event")' :class="['sortable',{active: sortKey == 'event' }]" >イベント名<span class="arrow" :class="sortOrders['event'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-					<th v-on:click='sortBy("title")' :class="['sortable',{active: sortKey == 'title' }]" >タイトル<span class="arrow" :class="sortOrders['title'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-<!--
-					<th v-for="(value, key) in columns" @click="sortBy(key)">
+					<th v-for="(value, key) in columnsSession" @click="sortSessionBy(key)" :class="['sortable',{active: sortKeySession == key }]">
 						{{ value }}
-						<span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'"></span>
+						<span class="arrow" :class="sortOrdersSession[key] > 0 ? 'asc' : 'dsec'">▼▲</span>
 					</th>
--->
-
 				</tr>
 				</thead>
 				<tbody>
 				
-				<tr v-for="session in filteredSessionss">
-					<td>{{session.id}}</td>
-					<td>{{session.event}}</td>
-					<td><a v-bind:href="decodeUrl(session)">{{session.title}}</a></td>
-	<!--
-					<td><a v-bind:href="session.url">{{session.title}}</a></td>
-					<td v-for="(value, key) in columns">
-						{{session[key]}}
-					</td>
-	-->
+				<tr v-for="item in filteredSessionss">
+					<td>{{item.id}}</td>
+					<td>{{item.event}}</td>
+					<td><a v-bind:href="decodeUrl(item)">{{item.title}}</a></td>
 				</tr>
-				
-	<!--
-				<tr v-for="session in sessions">
-					<td>{{session.name}}</td>
-					<td>{{session.mail}}</td>
-					<td>{{session.tel}}</td>
-				</tr>
-	-->
 				</tbody>
 			</table>
 		</div>
 		<div v-else-if="page === 'ツール'">
 			<table>
 				<thead>
-				<tr>
-					<th v-on:click='sortBy("tool")' :class="['sortable',{active: sortKey == 'tool' }]" >ツール<span class="arrow" :class="sortOrders['tool'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-					<th v-on:click='sortBy("title")' :class="['sortable',{active: sortKey == 'title' }]" >タイトル<span class="arrow" :class="sortOrders['title'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-					<th v-on:click='sortBy("session_id")' :class="['sortable',{active: sortKey == 'session_id' }]" >セッションID <span class="arrow" :class="sortOrders['session_id'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-				</tr>
+				<th v-for="(value, key) in columnsTool" @click="sortToolBy(key)" :class="['sortable',{active: sortKeyTool == key }]">
+					{{ value }}
+					<span class="arrow" :class="sortOrdersTool[key] > 0 ? 'asc' : 'dsec'">▼▲</span>
+				</th>
 				</thead>
 				<tbody>
-				
-				<tr v-for="tool in filteredTools">
-					<td>{{tool.tool}}</td>
-					<td>{{tool.title}}</td>
-					<td>{{tool.session_id}}</td>
+				<tr v-for="item in filteredTools">
+					<td v-for="(value, key) in columnsTool">{{ item[key] }}</td>
 				</tr>
 				</tbody>
 			</table>
-			<p>本サイトは、鈴木 英仁氏の「<a href="https://docs.google.com/spreadsheets/d/1JSA41-4fOaXMNqb-vBHodZePtBFdFXhAF_zZ8TYapn8/edit?fbclid=IwAR2naOBrCh1fcO2vhVHuNT6ZD78MErOuEBUmc-F8Imqm7wowlH-tUiUvnbo#gid=0">2021卒向け就職活動資料</a>」の情報を参考にさせていただいております。</p>
 		</div>
 		<div v-else-if="page === 'ゲーム会社'">
 			<table>
 				<thead>
-				<tr>
-					<th v-on:click='sortBy("name")' :class="['sortable',{active: sortKey == 'name' }]" >会社名<span class="arrow" :class="sortOrders['name'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-					<th v-on:click='sortBy("url")' :class="['sortable',{active: sortKey == 'url' }]" >採用情報<span class="arrow" :class="sortOrders['url'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-				</tr>
+				<th v-for="(value, key) in columnsCompany" @click="sortCompanyBy(key)" :class="['sortable',{active: sortKeyCompany == key }]">
+					{{ value }}
+					<span class="arrow" :class="sortOrdersCompany[key] > 0 ? 'asc' : 'dsec'">▼▲</span>
+				</th>
 				</thead>
 				<tbody>
-				
-				<tr v-for="campany in filteredCompanies">
-					<td>{{campany.name}}</td>
-					<td><a v-bind:href="decodeUrl(campany)">{{campany.url}}</a></td>
-				</tr>
+					<tr v-for="item in filteredCompanies">
+						<td>{{item.name}}</td>
+						<td><a v-bind:href="decodeUrl(item)">{{item.url}}</a></td>
+					</tr>
 				</tbody>
 			</table>
+			<p>本サイトは、鈴木 英仁氏の「<a href="https://docs.google.com/spreadsheets/d/1JSA41-4fOaXMNqb-vBHodZePtBFdFXhAF_zZ8TYapn8/edit?fbclid=IwAR2naOBrCh1fcO2vhVHuNT6ZD78MErOuEBUmc-F8Imqm7wowlH-tUiUvnbo#gid=0">2021卒向け就職活動資料</a>」の情報を参考にさせていただいております。</p>
 		</div>
 		<div v-else>
 		</div>
@@ -132,53 +106,33 @@
 	var app = new Vue({
 		el: '#app',
 		methods: {
-			sortBy: function(key) {
-				this.sortKey = key;
-				this.sortOrders[key] = this.sortOrders[key] * -1;
+			sortSessionBy: function(key) {
+				this.sortKeySession = key;
+				this.sortOrdersSession[key] = this.sortOrdersSession[key] * -1;
+			},
+			
+			sortToolBy: function(key) {
+				this.sortKeyTool = key;
+				this.sortOrdersTool   [key] = this.sortOrdersTool[key] * -1;
+			},
+			
+			sortCompanyBy: function(key) {
+				this.sortKeyCompany = key;
+				this.sortOrdersCompany[key] = this.sortOrdersCompany[key] * -1;
 			},
 			
 			decodeUrl: function(session){
 				return session.url;
-			}
-		},
-		computed: {
-			filteredSessionss: function () {
-				var data = this.sessions;
-
-				var sortKey = this.sortKey;
-				var order = this.sortOrders[sortKey] || 1;
-
-				if (sortKey) {
-					data = data.slice().sort(function(a, b){
-						a = a[sortKey];
-						b = b[sortKey];
-						return (a === b ? 0 : a > b ? 1 : -1) * order;
-					});
-				}
-				return data;
-			},
-
-			filteredTools: function () {
-				var data = this.tools;
-
-				var sortKey = this.sortKey;
-				var order = this.sortOrders[sortKey] || 1;
-
-				if (sortKey) {
-					data = data.slice().sort(function(a, b){
-						a = a[sortKey];
-						b = b[sortKey];
-						return (a === b ? 0 : a > b ? 1 : -1) * order;
-					});
-				}
-				return data;
 			},
 			
-			filteredCompanies: function () {
-				var data = this.companies;
+		},
 
-				var sortKey = this.sortKey;
-				var order = this.sortOrders[sortKey] || 1;
+		computed: {
+
+			filteredSessionss: function(src, sortKey) {
+				var data = this.sessions;
+				var sortKey = this.sortKeySession;
+				var order = this.sortOrdersSession[sortKey] || 1;
 
 				if (sortKey) {
 					data = data.slice().sort(function(a, b){
@@ -188,20 +142,60 @@
 					});
 				}
 				return data;
-			}
+			},
 
+			filteredTools: function(src, sortKey) {
+				var data = this.tools;
+				var sortKey = this.sortKeyTool;
+				var order = this.sortOrdersTool[sortKey] || 1;
+
+				if (sortKey) {
+					data = data.slice().sort(function(a, b){
+						a = a[sortKey];
+						b = b[sortKey];
+						return (a === b ? 0 : a > b ? 1 : -1) * order;
+					});
+				}
+				return data;
+			},
+
+			filteredCompanies: function(src, sortKey) {
+				var data = this.companies;
+				var sortKey = this.sortKeyCompany;
+				var order = this.sortOrdersCompany[sortKey] || 1;
+
+				if (sortKey) {
+					data = data.slice().sort(function(a, b){
+						a = a[sortKey];
+						b = b[sortKey];
+						return (a === b ? 0 : a > b ? 1 : -1) * order;
+					});
+				}
+				return data;
+			},
 		},
 		data: function () {
-			var columns = {
+			var columnsSession = {
 				id: 'ID',
 				event: 'イベント名',
-				url: 'url',
-				title: '講演名',
+				title: 'タイトル',
 			};
-			var sortOrders = {};
-			Object.keys(columns).forEach(function (key) {
-				sortOrders[key] = 1
-			});
+			var columnsTool = {
+				tool: 'ツール',
+				title: 'タイトル',
+				session_id: 'セッションID',
+			};
+			var columnsCompany = {
+				name: '会社名',
+				url: '採用情報名',
+			};
+			var sortOrdersSession = {};
+			var sortOrdersTool    = {};
+			var sortOrdersCompany = {};
+			Object.keys(columnsSession).forEach(function (key) {sortOrdersSession[key] = 1});
+			Object.keys(columnsTool   ).forEach(function (key) {sortOrdersTool   [key] = 1});
+			Object.keys(columnsCompany).forEach(function (key) {sortOrdersCompany[key] = 1});
+
 			
 			return {
 				page: '講演',
@@ -211,20 +205,25 @@
 					{ id: 3, name: 'ゲーム会社' },
 				],
 
-				sortKey: '',
-				sortOrders: sortOrders,
+				sortKeySession: '',
+				sortKeyTool:    '',
+				sortKeyCompany: '',
+				sortOrdersSession: sortOrdersSession,
+				sortOrdersTool:    sortOrdersTool,
+				sortOrdersCompany: sortOrdersCompany,
+				columnsSession: columnsSession,
+				columnsTool:    columnsTool,
+				columnsCompany: columnsCompany,
 				
-				columns: columns,
-				pageType: 'session',
-				sessions: [],
-				tools: [],
+				sessions:  [],
+				tools:     [],
 				companies: [],
 			}
 		},
 		mounted: function () {
-			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions = response.data; console.log(this.sessions)})
-			axios.get('https://gdev.info//assets/tool.json').then(response => {this.tools = response.data; console.log(this.tools)})
-			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response.data; console.log(this.companies)})
+			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions  = response.data})
+			axios.get('https://gdev.info//assets/tool.json'   ).then(response => {this.tools     = response.data})
+			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response.data})
 		},
 	})
 	</script>
