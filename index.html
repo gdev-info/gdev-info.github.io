@@ -4,8 +4,6 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>gdev.info</title>
-	<script src="https://unpkg.com/vue"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 	<style>
@@ -116,7 +114,7 @@
 				</thead>
 				<tbody>
 				
-				<tr v-for="campany in filteredCampanys">
+				<tr v-for="campany in filteredCompanies">
 					<td>{{campany.name}}</td>
 					<td><a v-bind:href="decodeUrl(campany)">{{campany.url}}</a></td>
 				</tr>
@@ -128,9 +126,10 @@
 	</div>
 	<div>本サイトは、公益財団法人 中山隼雄科学技術文化財団の研究助成事業の援助を受けて構築されました。<div>
 	<div>本サイトは、鈴木 英仁氏の「<a href="https://docs.google.com/spreadsheets/d/1JSA41-4fOaXMNqb-vBHodZePtBFdFXhAF_zZ8TYapn8/edit?fbclid=IwAR2naOBrCh1fcO2vhVHuNT6ZD78MErOuEBUmc-F8Imqm7wowlH-tUiUvnbo#gid=0">2021卒向け就職活動資料</a>」の情報を参考にさせていただいております。<div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
-	
-    <!-- メイン処理 -->
 	var app = new Vue({
 		el: '#app',
 		methods: {
@@ -176,8 +175,8 @@
 				return data;
 			},
 			
-			filteredCampanys: function () {
-				var data = this.campanys;
+			filteredCompanies: function () {
+				var data = this.companies;
 
 				var sortKey = this.sortKey;
 				var order = this.sortOrders[sortKey] || 1;
@@ -220,11 +219,11 @@
 				pageType: 'session',
 				sessions: [],
 				tools: [],
-				campanys: [],
+				companies: [],
 			}
 		},
 		mounted: {
-			axios.get('/assets/campany.json').then(response => {this.campanys = response});
+			axios.get('/assets/company.json').then(response => {this.companies = response});
 			axios.get('/assets/session.json').then(response => {this.sessions = response});
 			axios.get('/assets/tool.json').then(response => {this.tools = response});
 		}
