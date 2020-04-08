@@ -223,9 +223,10 @@
 			}
 		},
 		mounted: {
-			axios.get('/assets/company.json').then(response => {this.companies = response});
-			axios.get('/assets/session.json').then(response => {this.sessions = response});
-			axios.get('/assets/tool.json').then(response => {this.tools = response});
+			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response})
+          .catch(response => console.log(response));
+			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions = response});
+			axios.get('https://gdev.info//assets/tool.json').then(response => {this.tools = response});
 		}
 	})
 	</script>
