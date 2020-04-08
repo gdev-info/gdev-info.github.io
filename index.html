@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>gdev.info</title>
 	<script src="https://unpkg.com/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 	<style>
@@ -129,10 +130,6 @@
 	<div>本サイトは、鈴木 英仁氏の「<a href="https://docs.google.com/spreadsheets/d/1JSA41-4fOaXMNqb-vBHodZePtBFdFXhAF_zZ8TYapn8/edit?fbclid=IwAR2naOBrCh1fcO2vhVHuNT6ZD78MErOuEBUmc-F8Imqm7wowlH-tUiUvnbo#gid=0">2021卒向け就職活動資料</a>」の情報を参考にさせていただいております。<div>
 	<script>
 	
-	import campany_data from 'assets/campany.json'
-	import session_data from 'assets/session.json'
-	import tool_data from 'assets/tool.json'
-
     <!-- メイン処理 -->
 	var app = new Vue({
 		el: '#app',
@@ -221,12 +218,21 @@
 				
 				columns: columns,
 				pageType: 'session',
-				sessions: session_data
+				sessions: []
 ,
-				tools: tool_data,
-				campanys: campany_data,
+				tools: [],
+				campanys: [],
+				
+				session_data: [],
+				tool_data: [],
+				campany_data: [],
 			}
 		},
+		beforeCreate: function () {
+			axios.get("./assets/campany.json").then(response => (this.campanys = response))
+			axios.get("./assets/session.json").then(response => (this.sessions = response))
+			axios.get("./assets/tool.json").then(response => (this.tools = response))
+		}
 	})
 	</script>
 </body>
