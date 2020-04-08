@@ -109,8 +109,8 @@
 			<table>
 				<thead>
 				<tr>
-					<th v-on:click='sortBy("name")' :class="['sortable',{active: sortKey == 'name' }]" >ツール<span class="arrow" :class="sortOrders['name'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
-					<th v-on:click='sortBy("url")' :class="['sortable',{active: sortKey == 'url' }]" >タイトル<span class="arrow" :class="sortOrders['url'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
+					<th v-on:click='sortBy("name")' :class="['sortable',{active: sortKey == 'name' }]" >会社名<span class="arrow" :class="sortOrders['name'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
+					<th v-on:click='sortBy("url")' :class="['sortable',{active: sortKey == 'url' }]" >採用情報<span class="arrow" :class="sortOrders['url'] > 0 ? 'asc' : 'desc'"> ▼</span></th>
 				</tr>
 				</thead>
 				<tbody>
