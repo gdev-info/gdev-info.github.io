@@ -221,9 +221,9 @@
 			}
 		},
 		mounted: function () {
-			axios.get('https://gdev.info//assets/session.json').then(response => {this.sessions  = response.data})
-			axios.get('https://gdev.info//assets/tool.json'   ).then(response => {this.tools     = response.data})
-			axios.get('https://gdev.info//assets/company.json').then(response => {this.companies = response.data})
+			axios.get('https://gdev-info.github.io/assets/session.json').then(response => {this.sessions  = response.data})
+			axios.get('https://gdev-info.github.io/assets/tool.json'   ).then(response => {this.tools     = response.data})
+			axios.get('https://gdev-info.github.io/assets/company.json').then(response => {this.companies = response.data})
 		},
 	})
 	</script>
